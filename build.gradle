@@ -1,0 +1,92 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gplugins { // (1)\n" +
+                "    id 'org.springframework.boot' version '2.4.1' // RELEASE 삭제\n" +
+                "    id 'io.spring.dependency-management' version '1.0.10.RELEASE'\n" +
+                "    id 'java'\n" +
+                "}\n" +
+                "\n" +
+                "group 'com.jojoldu.book'\n" +
+                "version '1.0.4-SNAPSHOT-'+new Date().format(\"yyyyMMddHHmmss\")\n" +
+                "sourceCompatibility = 1.8   \n" +
+                "\n" +
+                "repositories {\n" +
+                "    mavenCentral()\n" +
+                "    jcenter()\n" +
+                "}\n" +
+                "\n" +
+                "// for Junit 5\n" +
+                "test { // (2)\n" +
+                "    useJUnitPlatform()\n" +
+                "}\n" +
+                "\n" +
+                "dependencies {\n" +
+                "    //(3)\n" +
+                "    implementation('org.springframework.boot:spring-boot-starter-web')\n" +
+                "    implementation('org.springframework.boot:spring-boot-starter-mustache')\n" +
+                "\n" +
+                "    // lombok\n" +
+                "    implementation('org.projectlombok:lombok')\n" +
+                "    annotationProcessor('org.projectlombok:lombok')\n" +
+                "    testImplementation('org.projectlombok:lombok')\n" +
+                "    testAnnotationProcessor('org.projectlombok:lombok')\n" +
+                "\n" +
+                "    implementation('org.springframework.boot:spring-boot-starter-data-jpa')\n" +
+                "    implementation(\"org.mariadb.jdbc:mariadb-java-client\")\n" +
+                "    implementation('com.h2database:h2')\n" +
+                "\n" +
+                "    implementation('org.springframework.boot:spring-boot-starter-oauth2-client') // 권한 관련\n" +
+                "    implementation('org.springframework.session:spring-session-jdbc') // 권한 관련\n" +
+                "\n" +
+                "    testImplementation('org.springframework.boot:spring-boot-starter-test')\n" +
+                "    testImplementation(\"org.springframework.security:spring-security-test\") // 권한 관련\n" +
+                "}radle-plugin:${springBootVersion}")
+    }
+}
+
+plugins { // (1)
+    id 'org.springframework.boot' version '2.4.1' // RELEASE 삭제
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+
+group 'com.jojoldu.book'
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+// for Junit 5
+test { // (2)
+    useJUnitPlatform()
+}
+
+dependencies {
+    //(3)
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
+
+    // lombok
+    implementation('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
+    testImplementation('org.projectlombok:lombok')
+    testAnnotationProcessor('org.projectlombok:lombok')
+
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation("org.mariadb.jdbc:mariadb-java-client")
+    implementation('com.h2database:h2')
+}
+
+test {
+    useJUnitPlatform()
+}
